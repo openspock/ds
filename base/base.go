@@ -55,5 +55,5 @@ type Iterator interface {
 	// data structure.
 	//
 	// It'll throw an error on the first occurence.
-	Iterate(f func(i interface{})) error
+	Iterate(f func(i interface{}) error) error
 }

@@ -53,10 +53,20 @@ func TestListRemoveTail(t *testing.T) {
 
 func TestLinkedListIterator(t *testing.T) {
 	l := makeIntLinkedList(10)
-	if err := l.Iterate(func(i interface{}) {
-		fmt.Println(i)
+	var op []int
+	if err := l.Iterate(func(i interface{}) error {
+		val, ok := i.(int)
+		if !ok {
+			return fmt.Errorf("int: expected, found %t", i)
+		}
+		op = append(op, val)
+		return nil
 	}); err != nil {
 		t.Error(err)
+	}
+
+	if len(op) != 10 {
+		t.Error("length: should have 10 elements")
 	}
 }
 

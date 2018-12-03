@@ -98,7 +98,7 @@ func (list *LinkedList) RemoveAt(index uint64) (interface{}, error) {
 
 // Iterate will execute a lambda function over each element of the
 // linked list.
-func (list *LinkedList) Iterate(f func(i interface{})) error {
+func (list *LinkedList) Iterate(f func(i interface{}) error) error {
 	for node := list.head; node != nil; node = node.next {
 		f(node.elem)
 	}
