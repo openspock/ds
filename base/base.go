@@ -46,3 +46,14 @@ type SizeCounter interface {
 	// Count returns the count of elements.
 	Count() uint64
 }
+
+// Iterator offers it's implementors to execute a lambda function on each
+// element in the data structure.
+type Iterator interface {
+
+	// Iterate will execute the lambda function f on each element of the
+	// data structure.
+	//
+	// It'll throw an error on the first occurence.
+	Iterate(f func(i interface{})) error
+}

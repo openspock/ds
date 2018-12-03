@@ -1,6 +1,7 @@
 package lists
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -47,6 +48,15 @@ func TestListRemoveTail(t *testing.T) {
 		if err != nil {
 			t.Error(err)
 		}
+	}
+}
+
+func TestLinkedListIterator(t *testing.T) {
+	l := makeIntLinkedList(10)
+	if err := l.Iterate(func(i interface{}) {
+		fmt.Println(i)
+	}); err != nil {
+		t.Error(err)
 	}
 }
 

@@ -96,6 +96,15 @@ func (list *LinkedList) RemoveAt(index uint64) (interface{}, error) {
 	return n.elem, nil
 }
 
+// Iterate will execute a lambda function over each element of the
+// linked list.
+func (list *LinkedList) Iterate(f func(i interface{})) error {
+	for node := list.head; node != nil; node = node.next {
+		f(node.elem)
+	}
+	return nil
+}
+
 func (list *LinkedList) nodeAt(index uint64) (*node, error) {
 	err := list.validateCount(index)
 	if err != nil {
