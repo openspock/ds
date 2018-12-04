@@ -25,6 +25,9 @@ func MakeLinkedList() *LinkedList {
 // Count returns the count of elements in this linked list.
 func (list *LinkedList) Count() uint64 {
 	i := uint64(0)
+	if list.head == nil {
+		return i
+	}
 	for node := list.head; node != nil; node = node.next {
 		i = i + 1
 	}
@@ -100,7 +103,9 @@ func (list *LinkedList) RemoveAt(index uint64) (interface{}, error) {
 // linked list.
 func (list *LinkedList) Iterate(f func(i interface{}) error) error {
 	for node := list.head; node != nil; node = node.next {
-		f(node.elem)
+		if err := f(node.elem); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -111,7 +116,7 @@ func (list *LinkedList) nodeAt(index uint64) (*node, error) {
 		return nil, err
 	}
 	node := list.head
-	for i := uint64(0); i <= index; i++ {
+	for i := uint64(0); i < index; i++ {
 		node = node.next
 	}
 	return node, nil

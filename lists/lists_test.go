@@ -70,6 +70,16 @@ func TestLinkedListIterator(t *testing.T) {
 	}
 }
 
+// Added this test to reproduce issue where adding a head to an empty
+// linked list throws a nil pointer dereference.
+func TestLinkedListAddHeadToEmptyList(t *testing.T) {
+	l := makeIntLinkedList(0)
+	l.AddAt(1, 0)
+	if l.Count() != 1 {
+		t.Errorf("count: should be 1, is %d", l.Count())
+	}
+}
+
 func makeIntLinkedList(count int) *LinkedList {
 	l := MakeLinkedList()
 	for i := 0; i < count; i++ {
