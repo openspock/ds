@@ -80,6 +80,13 @@ func TestLinkedListAddHeadToEmptyList(t *testing.T) {
 	}
 }
 
+func TestLinkedListAddHeads(t *testing.T) {
+	l := MakeLinkedList()
+	for i := 0; i < 10; i++ {
+		l.AddAt(i, uint64(0))
+	}
+}
+
 func makeIntLinkedList(count int) *LinkedList {
 	l := MakeLinkedList()
 	for i := 0; i < count; i++ {

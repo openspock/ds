@@ -61,7 +61,12 @@ func (list *LinkedList) AddAt(elem interface{}, index uint64) error {
 		return nil
 	}
 	newNode := node{elem, n, n.previous}
-	n.previous.next = &newNode
+	// if n.previous is nil, it means we're adding a new head
+	if n.previous != nil {
+		n.previous.next = &newNode
+	} else {
+		list.head = &newNode
+	}
 	n.previous = &newNode
 
 	return nil
