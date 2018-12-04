@@ -57,3 +57,23 @@ type Iterator interface {
 	// It'll throw an error on the first occurence.
 	Iterate(f func(i interface{}) error) error
 }
+
+// Queuer enables implementation of various kinds of queues.
+//
+// Concurrency is the concern of the implementor.
+type Queuer interface {
+
+	// Enqueue adds an element to the queue, throwing an error
+	// if the queue is full
+	//
+	// The location where the element is added depends on the type
+	// of the implementation.
+	Enqueue(i interface{}) error
+
+	// Dequeue removes an element from the queue, throwing an error
+	// if the queue is empty.
+	//
+	// The location where the element is added depends on the type
+	// of the implementation.
+	Dequeue() (interface{}, error)
+}
